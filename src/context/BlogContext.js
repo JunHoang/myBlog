@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 
 const BlogContext = React.createContext();
 
-const useBlogContext = () => {
+export const useBlogContext = () => {
   const context = useContext(BlogContext);
 
   if (!context) {
@@ -13,5 +13,5 @@ const useBlogContext = () => {
 };
 
 export const BlogProvider = ({ children }) => {
-  return <BlogContext.Provider>{children}</BlogContext.Provider>;
+  return <BlogContext.Provider value={25}>{children}</BlogContext.Provider>;
 };
