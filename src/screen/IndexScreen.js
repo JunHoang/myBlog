@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Button, StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { FlatList } from "react-navigation";
-import { FontAwesome } from "@expo/vector-icons";
+import { FontAwesome5 } from "@expo/vector-icons";
 
 import { Context } from "../context/BlogContext";
 
@@ -10,10 +10,6 @@ export default function IndexScreen({ navigation }) {
 
   return (
     <>
-      <Button
-        title="Add new blog post"
-        onPress={() => navigation.navigate("Create")}
-      />
       <FlatList
         data={state}
         keyExtractor={(item) => item.title}
@@ -27,12 +23,7 @@ export default function IndexScreen({ navigation }) {
                   {item.title} - {item.id}
                 </Text>
                 <TouchableOpacity onPress={() => deleteBlogPost(item.id)}>
-                  <FontAwesome
-                    name="trash-o"
-                    size={24}
-                    color="black"
-                    style={styles.icon}
-                  />
+                  <FontAwesome5 name="trash-alt" size={24} color="black" />
                 </TouchableOpacity>
               </View>
             </TouchableOpacity>
@@ -42,6 +33,16 @@ export default function IndexScreen({ navigation }) {
     </>
   );
 }
+
+IndexScreen.navigationOptions = ({ navigation }) => {
+  return {
+    headerRight: () => (
+      <TouchableOpacity onPress={() => navigation.navigate("Create")}>
+        <FontAwesome5 style={styles.iconPlus} name="plus" />
+      </TouchableOpacity>
+    ),
+  };
+};
 
 const styles = StyleSheet.create({
   row: {
@@ -58,5 +59,9 @@ const styles = StyleSheet.create({
   },
   icon: {
     fontSize: 26,
+  },
+  iconPlus: {
+    marginRight: 15,
+    fontSize: 18,
   },
 });
