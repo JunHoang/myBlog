@@ -13,6 +13,7 @@ export default function ShowScreen({ navigation }) {
       <Text>
         {blogPost.title} - {blogPostId}
       </Text>
+      <Text>{blogPost.content}</Text>
     </View>
   );
 }

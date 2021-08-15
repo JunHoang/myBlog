@@ -10,7 +10,10 @@ export default function IndexScreen({ navigation }) {
 
   return (
     <>
-      <Button title="Add new blog post" onPress={() => addBlogPost()} />
+      <Button
+        title="Add new blog post"
+        onPress={() => navigation.navigate("Create")}
+      />
       <FlatList
         data={state}
         keyExtractor={(item) => item.title}
