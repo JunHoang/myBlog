@@ -1,6 +1,5 @@
 import React, { useContext, useReducer } from "react";
-
-const BlogContext = React.createContext();
+import createDataContext from "./createDataContext";
 
 const blogReducer = (state, action) => {
   switch (action.type) {
@@ -12,30 +11,18 @@ const blogReducer = (state, action) => {
   }
 };
 
-export const useBlogContext = () => {
-  const context = useContext(BlogContext);
-
-  if (!context) {
-    throw new Error("useContext must be within BloggProvider");
-  }
-
-  return context;
-};
-
-export const BlogProvider = ({ children }) => {
-  const initialState = [];
-  const [blogPosts, dispatch] = useReducer(blogReducer, initialState);
-
-  const addBlogPost = () => {
+const addBlogPost = (dispatch) => {
+  return () => {
     dispatch({ type: "ADD_BLOG_POST" });
   };
-
-  const valueContext = {
-    blogPosts,
-    addBlogPost,
-  };
-
-  return (
-    <BlogContext.Provider value={valueContext}>{children}</BlogContext.Provider>
-  );
 };
+
+const actions = {
+  addBlogPost,
+};
+
+export const { Context, Provider } = createDataContext(
+  blogReducer,
+  actions,
+  []
+);
