@@ -9,7 +9,6 @@ export default function ShowScreen({ navigation }) {
   const { state } = useContext(Context);
 
   const blogPost = state.find((blogPost) => blogPost.id === blogPostId);
-  console.log("state", state);
 
   return (
     <View>
