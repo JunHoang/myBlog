@@ -1,5 +1,7 @@
 import React, { useContext } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { FontAwesome5 } from "@expo/vector-icons";
+
 import { Context } from "../context/BlogContext";
 
 export default function ShowScreen({ navigation }) {
@@ -7,6 +9,7 @@ export default function ShowScreen({ navigation }) {
   const { state } = useContext(Context);
 
   const blogPost = state.find((blogPost) => blogPost.id === blogPostId);
+  console.log("state", state);
 
   return (
     <View>
@@ -18,4 +21,22 @@ export default function ShowScreen({ navigation }) {
   );
 }
 
-const styles = StyleSheet.create({});
+ShowScreen.navigationOptions = ({ navigation }) => {
+  const blogPostId = navigation.getParam("id");
+  return {
+    headerRight: () => (
+      <TouchableOpacity
+        onPress={() => navigation.navigate("Edit", { blogPostId })}
+      >
+        <FontAwesome5 style={styles.icon} name="pen" size={24} color="black" />
+      </TouchableOpacity>
+    ),
+  };
+};
+
+const styles = StyleSheet.create({
+  icon: {
+    marginRight: 15,
+    fontSize: 18,
+  },
+});
