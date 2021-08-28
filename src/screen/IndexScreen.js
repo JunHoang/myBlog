@@ -1,12 +1,16 @@
-import React, { useContext } from "react";
-import { Button, StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import React, { useContext, useEffect } from "react";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { FlatList } from "react-navigation";
 import { FontAwesome5 } from "@expo/vector-icons";
 
 import { Context } from "../context/BlogContext";
 
 export default function IndexScreen({ navigation }) {
-  const { state, addBlogPost, deleteBlogPost } = useContext(Context);
+  const { state, deleteBlogPost, getBlogPosts } = useContext(Context);
+
+  useEffect(() => {
+    getBlogPosts();
+  }, []);
 
   return (
     <>
